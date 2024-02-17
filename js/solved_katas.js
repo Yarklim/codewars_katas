@@ -6137,3 +6137,60 @@ function toStrReverse(str) {
 // console.log(toStrReverse('Hello Yar, you are amazing!')); // 'olleH raY, ouy era gnizama!'
 
 //? ----------------------------------------------
+/*
+6 kyu Autocomplete! Yay!
+
+Функция автозаполнения принимает входную строку и массив словаря и возвращает значения из словаря, 
+которые начинаются с входной строки. Если совпадений более 5, ограничьте вывод первыми 5 результатами. 
+Если совпадений нет, верните пустой массив.
+
+Пример:
+autocomplete('ai', ['airplane','airport','apple','ball']) = ['airplane','airport']
+
+Для этой ката словарь всегда будет действительным массивом строк. Пожалуйста, верните все результаты в порядке, 
+указанном в словаре, даже если они не всегда в алфавитном порядке. 
+Поиск НЕ должен быть чувствительным к регистру, но регистр слова должен сохраняться при его возврате.
+
+Например, «Apple» и «аэропорт» вернутся при вводе «a». Однако они должны вернуться как «Apple» и «аэропорт» 
+в исходных случаях.
+
+Важная заметка:
+Любой ввод, который НЕ является буквой, должен рассматриваться так, как будто его нет. Например, ввод «$%^» 
+следует трактовать как «», а ввод «ab*&1cd» — как «abcd».
+*/
+function autocomplete(input, dictionary) {
+  const matchChars = input.match(/[a-z]/gi);
+  const matchedStr = matchChars ? matchChars.join('').toLowerCase() : '';
+  const result = [];
+
+  if (!matchedStr) return [];
+
+  for (const el of dictionary) {
+    if (result.length === 5) break;
+
+    if (el.toLowerCase().startsWith(matchedStr)) {
+      result.push(el);
+    }
+  }
+
+  return result;
+}
+
+// console.log(
+//   autocomplete('ai', [
+//     'airplane',
+//     'airport',
+//     'apple',
+//     'ball',
+//     'airplane',
+//     'airport',
+//     'apple',
+//     'airplane',
+//     'airport',
+//     'apple',
+//   ])
+// ); // ['airplane','airport', 'airplane', 'airport', 'apple']
+// console.log(autocomplete('a', ['airplane', 'airport', 'Apple', 'ball'])); // ['airplane','airport', 'Apple']
+// console.log(autocomplete('A*&1i', ['airplane', 'Airport', 'Apple', 'ball'])); // ['airplane','Airport']
+// console.log(autocomplete(',.*&1 ', ['airplane', 'Airport', 'Apple', 'ball'])); // ['airplane','Airport']
+//   ?------------------------------------------------------------------------
