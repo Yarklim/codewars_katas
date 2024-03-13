@@ -1,86 +1,5 @@
 //?-------------------------------------------------------
 /*
-6
-Simple Encryption #1 - Alternating Split
-
-Реализуйте алгоритм псевдошифрования, который для заданной строки 
-S и целого числа N объединяет все символы с нечетным индексом S со всеми 
-символами с четным индексом S, этот процесс следует повторять несколько N раз.
-
-Примеры:
-
-encrypt("012345", 1)  =>  "135024"
-encrypt("012345", 2)  =>  "135024"  ->  "304152"
-encrypt("012345", 3)  =>  "135024"  ->  "304152"  ->  "012345"
-
-encrypt("01234", 1)  =>  "13024"
-encrypt("01234", 2)  =>  "13024"  ->  "32104"
-encrypt("01234", 3)  =>  "13024"  ->  "32104"  ->  "20314"
-Вместе с функцией шифрования вы также должны реализовать функцию дешифрования, 
-которая меняет процесс.
-
-Если строка S является пустым значением или целое число N не является 
-положительным, вернуть первый аргумент без изменений.
-*/
-function encrypt(text, n) {
-  if (text === '' || n <= 0) {
-    return text;
-  }
-  let result = text;
-  for (let i = 0; i < n; i++) {
-    let odd = '';
-    let even = '';
-
-    for (let j = 0; j < result.length; j++) {
-      if (j % 2 === 0) {
-        even += result[j];
-      } else {
-        odd += result[j];
-      }
-    }
-    result = odd + even;
-  }
-  return result;
-}
-
-function decrypt(encryptedText, n) {
-  if (encryptedText === '' || n <= 0) {
-    return encryptedText;
-  }
-  let result = encryptedText;
-  for (let i = 0; i < n; i++) {
-    let halfLen = Math.floor(result.length / 2);
-    let odd = result.slice(0, halfLen + (result.length % 2));
-    let even = result.slice(halfLen + (result.length % 2));
-    result = '';
-    for (let j = 0; j < halfLen + (result.length % 2); j++) {
-      result += odd[j] + (even[j] || '');
-    }
-  }
-  return result;
-}
-
-// console.log(decrypt('304152', 2)); // "012345"
-// console.log(decrypt('This is a test!', 0)); // "This is a test!"
-// console.log(decrypt('hsi  etTi sats!', 1)); // "This is a test!"
-// console.log(decrypt('s eT ashi tist!', 2)); // "This is a test!"
-// console.log(decrypt(' Tah itse sits!', 3)); // "This is a test!"
-// console.log(decrypt('This is a test!', 4)); // "This is a test!"
-// console.log(decrypt('This is a test!', -1)); // "This is a test!"
-// console.log(decrypt('hskt svr neetn!Ti aai eyitrsig', 1)); // "This kata is very interesting!"
-
-// console.log(encrypt('012345', 2)); // "304152"
-// console.log(encrypt('This is a test!', 0)); // "This is a test!"
-// console.log(encrypt('This is a test!', 1)); // "hsi  etTi sats!"
-// console.log(encrypt('This is a test!', 2)); // "s eT ashi tist!"
-// console.log(encrypt('This is a test!', 3)); // " Tah itse sits!"
-// console.log(encrypt('This is a test!', 4)); // "This is a test!"
-// console.log(encrypt('This is a test!', -1)); // "This is a test!"
-// console.log(encrypt('This kata is very interesting!', 1)); // "hskt svr neetn!Ti aai eyitrsig"
-
-//? ------------------------------------------------
-
-/*
 4 kyu
 Strings Mix
 
@@ -432,3 +351,40 @@ function decompose(n) {
 // console.log(decompose(50)); // [1, 3, 5, 8, 49]
 // console.log(decompose(5)); // [3, 4]
 // ? -------------------------------------------------------
+/*
+Получится ли дать сдачу за товар стоимостью 5 долл?
+*/
+const checkChange = (arr) => {
+  if (arr[0] !== 5) return false;
+
+  const wallet = {};
+  let result = null;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 5) {
+      wallet[arr[i]] = wallet[arr[i]] + 1 || 1;
+    }
+    if (arr[i] > 5) {
+      let temp = arr[i];
+      for (const el in wallet) {
+        if (wallet[el] < 1) {
+          continue;
+        } else {
+          temp -= Number(el);
+          wallet[el] -= 1;
+        }
+      }
+
+      wallet[arr[i]] = wallet[arr[i]] + 1 || 1;
+      console.log(temp);
+    }
+  }
+
+  return wallet;
+};
+
+// console.log(checkChange([5, 5, 5, 10, 20])); // true
+// console.log(checkChange([5, 5, 5, 15])); // true
+// console.log(checkChange([5, 5, 10, 20])); // true
+// console.log(checkChange([5, 10, 20])); // false
+// console.log(checkChange([5, 10, 5, 10, 20])); // false

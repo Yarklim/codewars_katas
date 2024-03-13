@@ -6194,3 +6194,89 @@ function autocomplete(input, dictionary) {
 // console.log(autocomplete('A*&1i', ['airplane', 'Airport', 'Apple', 'ball'])); // ['airplane','Airport']
 // console.log(autocomplete(',.*&1 ', ['airplane', 'Airport', 'Apple', 'ball'])); // ['airplane','Airport']
 //   ?------------------------------------------------------------------------
+/*
+6
+Simple Encryption #1 - Alternating Split
+
+Реализуйте алгоритм псевдошифрования, который для заданной строки 
+S и целого числа N объединяет все символы с нечетным индексом S со всеми 
+символами с четным индексом S, этот процесс следует повторять несколько N раз.
+
+Примеры:
+
+encrypt("012345", 1)  =>  "135024"
+encrypt("012345", 2)  =>  "135024"  ->  "304152"
+encrypt("012345", 3)  =>  "135024"  ->  "304152"  ->  "012345"
+
+encrypt("01234", 1)  =>  "13024"
+encrypt("01234", 2)  =>  "13024"  ->  "32104"
+encrypt("01234", 3)  =>  "13024"  ->  "32104"  ->  "20314"
+Вместе с функцией шифрования вы также должны реализовать функцию дешифрования, 
+которая меняет процесс.
+
+Если строка S является пустым значением или целое число N не является 
+положительным, вернуть первый аргумент без изменений.
+*/
+function encrypt(text, n) {
+  if (text === null) return null;
+  if (text === '' || n <= 0) {
+    return text;
+  }
+  let result = text;
+  for (let i = 0; i < n; i++) {
+    let odd = '';
+    let even = '';
+
+    for (let j = 0; j < result.length; j++) {
+      if (j % 2 === 0) {
+        even += result[j];
+      } else {
+        odd += result[j];
+      }
+    }
+    result = odd + even;
+  }
+  return result;
+}
+
+function decrypt(encryptedText, n) {
+  if (encryptedText === null) return null;
+  if (encryptedText === '' || n <= 0) {
+    return encryptedText;
+  }
+
+  let result = encryptedText;
+
+  for (let i = 0; i < n; i++) {
+    let halfStr = Math.floor(result.length / 2);
+    let odd = result.slice(0, halfStr);
+    let even = result.slice(odd.length);
+
+    result = '';
+
+    for (let j = 0; j <= halfStr + (result.length % 2); j++) {
+      result += (even[j] || '') + (odd[j] || '');
+    }
+  }
+  return result;
+}
+
+// console.log(decrypt('304152', 2)); // "012345"
+// console.log(decrypt('This is a test!', 0)); // "This is a test!"
+// console.log(decrypt('hsi  etTi sats!', 1)); // "This is a test!"
+// console.log(decrypt('s eT ashi tist!', 2)); // "This is a test!"
+// console.log(decrypt(' Tah itse sits!', 3)); // "This is a test!"
+// console.log(decrypt('This is a test!', 4)); // "This is a test!"
+// console.log(decrypt('This is a test!', -1)); // "This is a test!"
+// console.log(decrypt('hskt svr neetn!Ti aai eyitrsig', 1)); // "This kata is very interesting!"
+
+// console.log(encrypt('012345', 2)); // "304152"
+// console.log(encrypt('This is a test!', 0)); // "This is a test!"
+// console.log(encrypt('This is a test!', 1)); // "hsi  etTi sats!"
+// console.log(encrypt('This is a test!', 2)); // "s eT ashi tist!"
+// console.log(encrypt('This is a test!', 3)); // " Tah itse sits!"
+// console.log(encrypt('This is a test!', 4)); // "This is a test!"
+// console.log(encrypt('This is a test!', -1)); // "This is a test!"
+// console.log(encrypt('This kata is very interesting!', 1)); // "hskt svr neetn!Ti aai eyitrsig"
+
+//? ------------------------------------------------
