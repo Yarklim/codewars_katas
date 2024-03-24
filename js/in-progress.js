@@ -139,32 +139,39 @@ function mix(s1, s2) {
 
   const obj1 = {};
   const obj2 = {};
-  const lettersArrr = s1.match(/[a-z]/g);
+  const lettersArr1 = s1.match(/[a-z]/g);
+  const lettersArr2 = s2.match(/[a-z]/g);
 
   for (const el of s1) {
-    if (lettersArrr.includes(el)) {
+    if (lettersArr2.includes(el)) {
       if (!obj1[el]) obj1[el] = 0;
       obj1[el] += 1;
     }
   }
 
   for (const el of s2) {
-    if (lettersArrr.includes(el)) {
+    if (lettersArr1.includes(el)) {
       if (!obj2[el]) obj2[el] = 0;
       obj2[el] += 1;
     }
   }
 
-  const sortLetters1 = Object.entries(obj1)
-    .filter((el) => el[1] > 1)
-    .sort((a, b) => b[1] - a[1]);
-  const sortLetters2 = Object.entries(obj2)
-    .filter((el) => el[1] > 1)
-    .sort((a, b) => b[1] - a[1]);
+  const sortLetters1 = new Array(
+    ...Object.entries(obj1)
+      .filter((el) => el[1] > 1)
+      .sort((a, b) => b[1] - a[1])
+  );
+  const sortLetters2 = new Array(
+    ...Object.entries(obj2)
+      .filter((el) => el[1] > 1)
+      .sort((a, b) => b[1] - a[1])
+  );
+
+  // for (let i = 0; i < )
 
   let result = '';
 
-  return sortLetters2;
+  return sortLetters1;
 }
 // console.log(mix('Are they here', 'yes, they are here')); // "2:eeeee/2:yy/=:hh/=:rr"
 // console.log(mix('A generation must confront the looming ', 'codewarrs')); // "1:nnnnn/1:ooooo/1:tttt/1:eee/1:gg/1:ii/1:mm/=:rr"
@@ -334,3 +341,153 @@ const checkChange = (arr) => {
 // console.log(checkChange([5, 10, 20])); // false
 // console.log(checkChange([5, 10, 5, 10, 20])); // false
 // ? ----------------------------------------------------------
+/*
+7 kyu Correct the time-string
+Вам нужно создать метод, который исправляет заданную строку времени.
+Кроме того, возникла проблема: многие временные струны порваны.
+Время форматируется в 24-часовом формате, то есть от 00:00:00до 23:59:59.
+Примеры
+"09:10:01" -> "09:10:01"  
+"11:70:10" -> "12:10:10"  
+"19:99:99" -> "20:40:39"  
+"24:01:01" -> "00:01:01"  
+Если входная строка равна нулю или пуста, верните именно это значение! 
+Если формат строки времени недействителен, верните ноль. 
+*/
+function timeCorrect(timestring) {
+  return '?';
+}
+
+// console.log(timeCorrect('001122')); // null
+// console.log(timeCorrect('00;11;22')); // null
+// console.log(timeCorrect('0a:1c:22')); // null
+// console.log(timeCorrect('09:10:01')); // 09:10:01
+// console.log(timeCorrect('11:70:10')); // 12:10:10
+// console.log(timeCorrect('19:99:99')); // 20:40:39
+// console.log(timeCorrect('24:01:01')); // 00:01:01
+// console.log(timeCorrect('52:01:01')); // 04:01:01
+
+// ? ----------------------------------------------------------
+/*
+7 kyu Linked Lists - Push & BuildOneTwoThree
+Связанные списки — Push & BuildOneTwoThree
+
+Напишите функции push() и buildOneTwoThree(), чтобы легко обновлять и 
+инициализировать связанные списки. 
+Попробуйте использовать функцию push() в вашей функции buildOneTwoThree().
+
+Вот пример использования push():
+
+var chained = null
+chained = push(chained, 3)
+chained = push(chained, 2)
+chained = push(chained, 1)
+push(chained, 8) === 8 -> 1 -> 2 -> 3 -> null
+Функция push принимает параметры head и data, где head — это либо объект узла, 
+либо значение null/None/nil. Ваша реализация push должна иметь возможность 
+создавать новый связанный список/узел, когда заголовок имеет значение null/None/nil.
+
+Функция buildOneTwoThree должна создавать и возвращать связанный список с 
+тремя узлами:1 -> 2 -> 3 -> null
+*/
+function Node(data) {
+  this.data = data;
+  this.next = null;
+}
+
+function push(head, data) {
+  // Go.
+}
+
+function buildOneTwoThree() {
+  // Go.
+}
+
+// console.log(push(null, 1).data) // 1
+// console.log(push(null, 1).next) // null
+// console.log(push(new Node(1), 2).data) // 2
+// console.log(push(new Node(1), 2).next.data) // 1
+// console.log(buildOneTwoThree().data) // 1
+// console.log(buildOneTwoThree().next.data) // 2
+// console.log(buildOneTwoThree().next.next.data) // 3
+// console.log(buildOneTwoThree().next.next.next) // null
+// ? ----------------------------------------------------------
+/*
+6 kyu Linked Lists - Length & Count
+
+Связанные списки — длина и количество
+
+Реализовать lengthдля подсчета количества узлов в связанном списке.
+
+length(null) => 0
+length(1 -> 2 -> 3 -> null) => 3
+Реализуйте Count() для подсчета вхождений целого числа в связанный список.
+
+count(null, 1) => 0
+count(1 -> 2 -> 3 -> null, 1) => 1
+count(1 -> 1 -> 1 -> 2 -> 2 -> 2 -> 2 -> 3 -> 3 -> null, 2) => 4
+Я решил объединить эти две функции в одном Kata, поскольку они обе очень похожи.
+
+Функции push()/ Push()и buildOneTwoThree()/ BuildOneTwoThree()переопределять не нужно.
+*/
+
+// function Node(data) {
+//   this.data = data;
+//   this.next = null;
+// }
+
+// function length(head) {
+//   // Your code goes here.
+// }
+
+// function count(head, data) {
+//   // Your code goes here.
+// }
+// console.log(length(null)) // 0
+// console.log(length(new Node(99))) // 1
+// console.log(length(buildOneTwoThree())) // 3
+//   console.log(count(list, 1)) // 1
+//   console.log(count(list, 2)) // 1
+//   console.log(count(list, 3)) // 1
+// console.log(count(list, 99)) // 0
+//   console.log(count(null, 1)) // 0
+// ? -------------------------------------------------
+class LinkedListNode {
+  constructor(value, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+
+  toString() {
+    return `${this.value}`;
+  }
+}
+
+class LinkedList {
+  construktor() {
+    this.head = null;
+    this.tail = null;
+  }
+
+  append(value) {
+    const newNode = new LinkedListNode(value);
+
+    if (!this.head || !this.tail) {
+      this.head = newNode;
+      this.tail = newNode;
+
+      return this;
+    }
+
+    this.tail.next = newNode;
+    this.tail = newNode;
+
+    return this;
+  }
+}
+
+const list = new LinkedList();
+
+list.append('a').append('b').append('c');
+
+console.log(JSON.stringify(list));
