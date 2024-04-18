@@ -6497,3 +6497,43 @@ function change(string) {
 }
 // console.log(change('a **& bZ ')); // "11000000000000000000000001"
 // ? ------------------------------------------------------------
+/*
+4 kyu Multiplying numbers as strings
+
+Умножьте два числа! Простой!
+
+Аргументы передаются в виде строк.
+Числа могут быть очень большими
+Ответ должен быть возвращен в виде строки
+Возвращаемый «число» не должно начинаться с нулей, например 0123 недействительно.
+*/
+function multiplyLargeNumbers(a, b) {
+  const strLen1 = a.length;
+  const strLen2 = b.length;
+  const result = new Array(strLen1 + strLen2).fill(0);
+
+  for (let i = strLen1 - 1; i >= 0; i--) {
+    for (let j = strLen2 - 1; j >= 0; j--) {
+      const multi = a[i] * b[j];
+      const sum = multi + result[i + j + 1];
+      result[i + j + 1] = sum % 10;
+      result[i + j] += Math.floor(sum / 10);
+    }
+  }
+
+  let startIndex = 0;
+  while (startIndex < result.length && result[startIndex] === 0) {
+    startIndex++;
+  }
+
+  return result.slice(startIndex).join('') || '0';
+}
+
+console.log(multiplyLargeNumbers('2', '3')); // "6"
+console.log(multiplyLargeNumbers('30', '69')); // "2070"
+console.log(multiplyLargeNumbers('11', '85')); // "935"
+console.log(
+  multiplyLargeNumbers('12345678901234567890', '98765432109876543210')
+); // "1219326311370217952237463801111263526900"
+
+// ? -----------------------------------------------------------
