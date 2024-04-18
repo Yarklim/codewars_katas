@@ -6370,4 +6370,130 @@ function stat(strg) {
 //   stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41')
 // ); // "Range: 00|31|17 Average: 02|26|18 Median: 02|22|00"
 
-//? -----------------------------------------------------------
+// ? -------------------------------------------------
+/*
+7 kyu Looking for a benefactor
+
+Счета ассоциации «Fat to Fit Club (FFC)» курируются Джоном в качестве 
+бухгалтера-волонтера. Ассоциация финансируется за счет финансовых пожертвований 
+щедрых благотворителей. У Джона есть список первых nпожертвований: 
+[14, 30, 5, 7, 9, 11, 15] он хочет знать, сколько следующий благотворитель 
+должен дать ассоциации, чтобы среднее значение первых n + 1 пожертвований достигло 
+среднего значения 0,000 30. Посчитав, он нашел 149. Он думает, 
+что мог совершить ошибку.
+
+если dons = [14, 30, 5, 7, 9, 11, 15]тогдаnew_avg(dons, 30) --> 149
+
+Не могли бы вы помочь ему?
+
+Задача
+Функция new_avg(arr, navg)должна возвращать ожидаемое пожертвование 
+(округленное до следующего целого числа), что позволит достичь 
+среднего значения navg.
+
+Если последнее пожертвование будет неположительным числом, 
+(<= 0)Джон хочет, чтобы мы:
+
+вернуться: null
+
+Ничего в Haskell, Elm
+Нет в F#, Ocaml, Rust, Scala.
+-1на C, D, Fortran, Nim, PowerShell, Go, Pascal, Prolog, Lua, Perl, Erlang
+или выдать ошибку (несколько примеров для такого случая):
+
+IllegalArgumentException() в Clojure, Java, Kotlin
+ArgumentException() в C#
+эхо ERRORв Shell
+ошибка аргумента в Racket
+std::invalid_argument в C++
+ValueError в Python
+Так он ясно увидит, что его ожидания недостаточно велики. 
+В «Примерах тестов» вы можете увидеть, что возвращать.
+
+Примечания:
+все пожертвования и navgявляются числами (целыми или плавающими), 
+arr могут быть пустыми.
+См. примеры ниже и «Примеры тестов», чтобы узнать, какой возврат необходимо выполнить.
+new_avg([14, 30, 5, 7, 9, 11, 15], 92) should return 645
+new_avg([14, 30, 5, 7, 9, 11, 15], 2) 
+should raise an error (ValueError or invalid_argument or argument-error or DomainError or ... ) 
+or return `-1` or ERROR or Nothing or None depending on the language.
+*/
+
+function newAvg(arr, newavg) {
+  const avgs = arr.reduce((acc, el) => acc + el, 0);
+  const result = Math.ceil(newavg * (arr.length + 1) - avgs);
+
+  if (result <= 0) {
+    throw new Error('Expected New Average is too low');
+  }
+
+  return result;
+}
+
+// console.log(newAvg([14, 30, 5, 7, 9, 11, 16], 90)); // 628
+// console.log(newAvg([14, 30, 5, 7, 9, 11, 15], 92)); // 645
+// console.log(newAvg([14, 30, 5, 7, 9, 11, 15], 2)); // 'Expected New Average is too low'
+// ? -------------------------------------------------------------
+function rank(st, we, n) {
+  if (st.length < 1) return 'No participants';
+
+  const participantsArr = st.split(',');
+
+  if (n > participantsArr.length) return 'Not enough participants';
+
+  const charsSum = participantsArr.reduce((acc, el, i) => {
+    acc.push([
+      el,
+      el
+        .split('')
+        .reduce((acc, i) => acc + i.toLowerCase().charCodeAt() - 95, 0) * we[i],
+    ]);
+    return acc;
+  }, []);
+
+  const sortedCharsVal = charsSum.sort((a, b) => b[1] - a[1]);
+
+  for (let i = 0; i < sortedCharsVal.length - 1; i++) {
+    if (sortedCharsVal[i][1] === sortedCharsVal[i + 1][1]) {
+      const temp = [sortedCharsVal[i], sortedCharsVal[i + 1]].sort();
+      sortedCharsVal.splice(i, temp.length, ...temp);
+    }
+  }
+
+  return sortedCharsVal[n - 1][0];
+}
+console.log(
+  rank(
+    'Lagon,Joshua,Naoh,Sophia,Michael,Grace,Sofia,Aubrey,Logan,Emily,Abigail,Matthew,Willaim,James,Olivia,David,Emma',
+    [2, 6, 2, 5, 4, 1, 6, 6, 3, 3, 1, 3, 1, 3, 3, 6, 3],
+    12
+  )
+); // 'Lagon'
+console.log(
+  rank(
+    'Ella,Benjamin,Chloe,Willaim,Michael,Elijah,Mason,Grace,Emma,Olivia,William,Liam,Lagon,Olivai,Logan,David,Joshua,Ethan,Sophia,Matthew,Aiden,Noah,Avery',
+    [4, 2, 6, 2, 2, 5, 1, 3, 6, 4, 6, 3, 6, 3, 6, 3, 5, 4, 1, 3, 2, 2, 5],
+    5
+  )
+); // 'Logan'
+
+// ? ------------------------------------------------------------------------
+function change(string) {
+  const lettersArr = string.toLowerCase().match(/[a-z]/g);
+  const result = Array.from({ length: 26 }, () => '0');
+
+  function charIdx(char) {
+    return char.toLowerCase().charCodeAt() - 97;
+  }
+
+  if (lettersArr) {
+    for (const el of lettersArr) {
+      result[charIdx(el)] = '1';
+    }
+  }
+
+  return result;
+}
+// console.log(change('a **& bZ ')); // "11000000000000000000000001"
+// ? ------------------------------------------------------------

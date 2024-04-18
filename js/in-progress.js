@@ -202,37 +202,7 @@ function listSquared(m, n) {
 // console.log(listSquared(42, 250)); // [[42, 2500], [246, 84100]]
 // console.log(listSquared(250, 500)); // [[287, 84100]]
 //? ----------------------------------
-function rank(st, we, n) {
-  if (st.length < 1) return 'No participants';
-  const participantsArr = st.split(',');
 
-  if (n > participantsArr.length) return 'Not enough participants';
-
-  const charsSum = participantsArr.reduce((acc, el, i) => {
-    acc[el] =
-      el
-        .split('')
-        .reduce((acc, i) => acc + i.toLowerCase().charCodeAt() - 95, 0) * we[i];
-
-    return acc;
-  }, {});
-
-  return charsSum;
-}
-// console.log(
-//   rank(
-//     'Addison,Jayden,Sofia,Michael,Andrew,Lily,Benjamin',
-//     [4, 2, 1, 4, 3, 1, 2],
-//     4
-//   )
-// ); // Benjamin
-// console.log(rank('Lagon,Lily', [1, 5], 2)); // Lagon
-// console.log(
-//   rank('COLIN,AMANDBA,AMANDAB,CAROL,PauL,JOSEPH', [1, 4, 4, 5, 2, 1], 4)
-// ); // "PauL"
-// console.log(rank('', [4, 2, 1, 4, 3, 1, 2], 6)); // "No participants"
-
-// ? ------------------------------------------------------------------------
 /*
 4 kyu
 Explosive Sum
@@ -340,32 +310,6 @@ const checkChange = (arr) => {
 // console.log(checkChange([5, 5, 10, 20])); // true
 // console.log(checkChange([5, 10, 20])); // false
 // console.log(checkChange([5, 10, 5, 10, 20])); // false
-// ? ----------------------------------------------------------
-/*
-7 kyu Correct the time-string
-Вам нужно создать метод, который исправляет заданную строку времени.
-Кроме того, возникла проблема: многие временные струны порваны.
-Время форматируется в 24-часовом формате, то есть от 00:00:00до 23:59:59.
-Примеры
-"09:10:01" -> "09:10:01"  
-"11:70:10" -> "12:10:10"  
-"19:99:99" -> "20:40:39"  
-"24:01:01" -> "00:01:01"  
-Если входная строка равна нулю или пуста, верните именно это значение! 
-Если формат строки времени недействителен, верните ноль. 
-*/
-function timeCorrect(timestring) {
-  return '?';
-}
-
-// console.log(timeCorrect('001122')); // null
-// console.log(timeCorrect('00;11;22')); // null
-// console.log(timeCorrect('0a:1c:22')); // null
-// console.log(timeCorrect('09:10:01')); // 09:10:01
-// console.log(timeCorrect('11:70:10')); // 12:10:10
-// console.log(timeCorrect('19:99:99')); // 20:40:39
-// console.log(timeCorrect('24:01:01')); // 00:01:01
-// console.log(timeCorrect('52:01:01')); // 04:01:01
 
 // ? ----------------------------------------------------------
 /*
@@ -451,43 +395,5 @@ count(1 -> 1 -> 1 -> 2 -> 2 -> 2 -> 2 -> 3 -> 3 -> null, 2) => 4
 //   console.log(count(list, 3)) // 1
 // console.log(count(list, 99)) // 0
 //   console.log(count(null, 1)) // 0
-// ? -------------------------------------------------
-class LinkedListNode {
-  constructor(value, next = null) {
-    this.value = value;
-    this.next = next;
-  }
 
-  toString() {
-    return `${this.value}`;
-  }
-}
-
-class LinkedList {
-  construktor() {
-    this.head = null;
-    this.tail = null;
-  }
-
-  append(value) {
-    const newNode = new LinkedListNode(value);
-
-    if (!this.head || !this.tail) {
-      this.head = newNode;
-      this.tail = newNode;
-
-      return this;
-    }
-
-    this.tail.next = newNode;
-    this.tail = newNode;
-
-    return this;
-  }
-}
-
-const list = new LinkedList();
-
-list.append('a').append('b').append('c');
-
-console.log(JSON.stringify(list));
+// ? -----------------------------------------------------------
