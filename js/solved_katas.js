@@ -6537,3 +6537,32 @@ console.log(
 ); // "1219326311370217952237463801111263526900"
 
 // ? -----------------------------------------------------------
+var countDeafRats = function (town) {
+  const [left, right] = town.split('P');
+
+  const leftRats = left.replaceAll(' ', '');
+  const rightRats = right.replaceAll(' ', '');
+
+  let count = 0;
+
+  for (let i = 0; i < leftRats.length; i += 2) {
+    if (leftRats[i] === 'O') {
+      count++;
+    }
+  }
+
+  for (let i = 1; i < rightRats.length; i += 2) {
+    if (rightRats[i] === 'O') {
+      count++;
+    }
+  }
+
+  return count;
+
+  // return [...town.replace(/ +/g,'')].reduce((a,c,i) => a+(i%2==0 && c=='O'), 0);
+};
+// console.log(countDeafRats('~O~O~O~O P')); // 0
+// console.log(countDeafRats('P O~ O~ ~O O~')); // 1
+// console.log(countDeafRats('~O~O~O~OP~O~OO~')); // 2
+// console.log(countDeafRats('~O~O~O~OO~P~O~O~O')); // 4
+// ? ------------------------------------------------------------------

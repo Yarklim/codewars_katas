@@ -438,36 +438,3 @@ function chained(functions) {
 // console.log(chained([f3, f2, f1])) //  2, 12);
 // console.log(chained([f4, f5, f6])) //  "lorem ipsum", "merol_muspi");
 // ? -----------------------------------------------------------
-var countDeafRats = function (town) {
-  const str = town.split(' ').join('');
-  const idxP = str.indexOf('P');
-  let count = 0;
-
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === 'P') {
-      continue;
-    }
-    if (
-      str[i] === '~' &&
-      str[i + 1] === 'O' &&
-      (str[i + 2] === 'O' || str[i + 2] !== 'P') &&
-      i > idxP
-    ) {
-      count += 1;
-    }
-    if (
-      str[i] === 'O' &&
-      str[i + 1] === '~' &&
-      (str[i + 2] === '~' || str[i + 2] === 'P') &&
-      i < idxP
-    ) {
-      count += 1;
-    }
-  }
-
-  return count;
-};
-console.log(countDeafRats('~O~O~O~O P')); // 0
-console.log(countDeafRats('P O~ O~ ~O O~')); // 1
-console.log(countDeafRats('~O~O~O~OP~O~OO~')); // 2
-console.log(countDeafRats('~O~O~O~OO~P~O~O~O')); // 4
