@@ -397,3 +397,77 @@ count(1 -> 1 -> 1 -> 2 -> 2 -> 2 -> 2 -> 3 -> 3 -> null, 2) => 4
 //   console.log(count(null, 1)) // 0
 
 // ? -----------------------------------------------------------
+/*
+6 kyu Unary function chainer
+
+Ваша задача — написать функцию более высокого порядка для объединения списка унарных функций. 
+Другими словами, он должен возвращать функцию, которая выполняет складку влево для заданных функций.
+
+chained([a,b,c,d])(input)
+Должен дать тот же результат, что и
+
+d(c(b(a(input))))
+*/
+function chained(functions) {
+  return function () {};
+}
+
+// function f1(x) {
+//   return x * 2;
+// }
+// function f2(x) {
+//   return x + 2;
+// }
+// function f3(x) {
+//   return Math.pow(x, 2);
+// }
+
+// function f4(x) {
+//   return x.split('').concat().reverse().join('').split(' ');
+// }
+// function f5(xs) {
+//   return xs.concat().reverse();
+// }
+// function f6(xs) {
+//   return xs.join('_');
+// }
+
+// functions,      arg,    expected
+// console.log(chained([f1, f2, f3])) //  0, 4);
+// console.log(chained([f1, f2, f3])) //  2, 36);
+// console.log(chained([f3, f2, f1])) //  2, 12);
+// console.log(chained([f4, f5, f6])) //  "lorem ipsum", "merol_muspi");
+// ? -----------------------------------------------------------
+var countDeafRats = function (town) {
+  const str = town.split(' ').join('');
+  const idxP = str.indexOf('P');
+  let count = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === 'P') {
+      continue;
+    }
+    if (
+      str[i] === '~' &&
+      str[i + 1] === 'O' &&
+      (str[i + 2] === 'O' || str[i + 2] !== 'P') &&
+      i > idxP
+    ) {
+      count += 1;
+    }
+    if (
+      str[i] === 'O' &&
+      str[i + 1] === '~' &&
+      (str[i + 2] === '~' || str[i + 2] === 'P') &&
+      i < idxP
+    ) {
+      count += 1;
+    }
+  }
+
+  return count;
+};
+console.log(countDeafRats('~O~O~O~O P')); // 0
+console.log(countDeafRats('P O~ O~ ~O O~')); // 1
+console.log(countDeafRats('~O~O~O~OP~O~OO~')); // 2
+console.log(countDeafRats('~O~O~O~OO~P~O~O~O')); // 4
