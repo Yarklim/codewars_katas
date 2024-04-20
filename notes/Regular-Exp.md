@@ -343,3 +343,16 @@ String.prototype.vowel = function () {
 // console.log('ou'.vowel()); // false);
 // console.log('z'.vowel()); // false);
 // console.log('lol'.vowel()); // false);
+
+# -----------------------------------------------------------------------------
+function checkThreeAndTwo(array) {
+  // return /a{3}b{2}/g.test(array.join(''));
+  //   return array.join('').match(/^(?=(?:[^a]*a){3})(?=(?:[^b]*b){2})[ab]*$/g);
+  return /^(?=(?:[^a]*a){3})(?=(?:[^b]*b){2})[ab]*$/g.test(array.join(''));
+
+   return /^(.)\1\1?$/.test(array.join``.split(array[0]).join``);
+}
+console.log(checkThreeAndTwo(['a', 'a', 'a', 'b', 'b'])); // true
+console.log(checkThreeAndTwo(['a', 'b', 'a', 'a', 'b'])); // true
+console.log(checkThreeAndTwo(['a', 'c', 'a', 'c', 'b'])); // false
+console.log(checkThreeAndTwo(['a', 'a', 'a', 'a', 'a'])); // false

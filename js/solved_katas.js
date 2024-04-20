@@ -6566,3 +6566,25 @@ var countDeafRats = function (town) {
 // console.log(countDeafRats('~O~O~O~OP~O~OO~')); // 2
 // console.log(countDeafRats('~O~O~O~OO~P~O~O~O')); // 4
 // ? ------------------------------------------------------------------
+/*
+7 kyu Who is the killer?
+*/
+function killer(suspectInfo, dead) {
+  for (const key in suspectInfo) {
+    if (dead.every((item) => suspectInfo[key].includes(item))) {
+      return key;
+    }
+  }
+}
+// console.log(
+//   killer(
+//     {
+//       James: ['Jacob', 'Bill', 'Lucas'],
+//       Johnny: ['David', 'Kyle', 'Lucas'],
+//       Peter: ['Lucy', 'Kyle'],
+//     },
+//     ['Lucas', 'Bill']
+//   )
+// ); // 'James'
+// console.log(killer({ Brad: [], Megan: ['Ben', 'Kevin'], Finn: [] }, ['Ben'])); // 'Megan'
+// ? -------------------------------------------------------------
