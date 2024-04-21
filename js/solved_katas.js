@@ -6588,3 +6588,16 @@ function killer(suspectInfo, dead) {
 // ); // 'James'
 // console.log(killer({ Brad: [], Megan: ['Ben', 'Kevin'], Finn: [] }, ['Ben'])); // 'Megan'
 // ? -------------------------------------------------------------
+function sorter(textbooks) {
+  return textbooks.sort((a, b) =>
+    a.toLowerCase() > b.toLowerCase()
+      ? 1
+      : a.toLowerCase() < b.toLowerCase()
+      ? -1
+      : 0
+  );
+}
+//   console.log(sorter(['**english', '$istory', 'Alg#bra', 'Geom^try'])); // [ '$istory', '**english', 'Alg#bra', 'Geom^try' ]
+//   console.log(sorter(['Algebra', 'history', 'Geometry', 'english'])); // ['Algebra', 'english', 'Geometry', 'history']
+//   console.log(sorter(['Alg#bra', '$istory', 'Geom^try', '**english'])); // [ '$istory', '**english', 'Alg#bra', 'Geom^try' ]
+// ? -----------------------------------------------------------
