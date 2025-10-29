@@ -6600,4 +6600,416 @@ function sorter(textbooks) {
 //   console.log(sorter(['**english', '$istory', 'Alg#bra', 'Geom^try'])); // [ '$istory', '**english', 'Alg#bra', 'Geom^try' ]
 //   console.log(sorter(['Algebra', 'history', 'Geometry', 'english'])); // ['Algebra', 'english', 'Geometry', 'history']
 //   console.log(sorter(['Alg#bra', '$istory', 'Geom^try', '**english'])); // [ '$istory', '**english', 'Alg#bra', 'Geom^try' ]
+
 // ? -----------------------------------------------------------
+function getDivisors(n) {
+  const sqrN = Math.sqrt(n);
+  let count = 0;
+
+  for (let i = 1; i <= sqrN; i++) {
+    if (n % i === 0) {
+      count += i === n / i ? 1 : 2;
+    }
+  }
+  return count;
+}
+
+console.log(getDivisors(3600));
+// ? ----------------------------------------------
+class Dictionary {
+  constructor() {
+    this.entries = {}; // Используем объект для хранения пар ключ-значение
+  }
+
+  newEntry(key, value) {
+    this.entries[key] = value; // Добавляем новую запись в словарь
+  }
+
+  look(key) {
+    if (key in this.entries) {
+      // Проверяем, есть ли ключ в словаре
+      return this.entries[key];
+    } else {
+      return `Can't find entry for ${key}`;
+    }
+  }
+}
+// ? -----------------------------------------------------------
+function gordon(ramsay) {
+  return ramsay
+    .toUpperCase()
+    .replace(/\w+/g, '$&!!!!')
+    .replace(/[AEIOU]/g, (v) => (v == 'A' ? '@' : '*'));
+}
+
+// console.log(gordon('What feck damn cake')); // 'WH@T!!!! F*CK!!!! D@MN!!!! C@K*!!!!'
+
+// ? ---------------------------------------------------------
+function sortme(names) {
+  return names.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+}
+
+// console.log(sortme(['Hello', 'there', "I'm", 'fine'])); // ["fine", "Hello", "I'm", "there"]
+// console.log(sortme(['C', 'd', 'a', 'B'])); // ["a", "B", "C", "d"]
+// console.log(sortme(['CodeWars'])); // ["CodeWars"]
+// console.log(
+//   sortme(['come', 'Big', 'Will', 'My', 'Want', 'will', 'Young', 'long', 'It'])
+// ); // ["Big","come","It","long","My","Want","Will","will","Young"]
+
+// ? --------------------------------------------------------------
+function Xbonacci(signature, n) {
+  if (signature.length >= n) {
+    return signature.slice(0, n);
+  }
+
+  const result = [...signature];
+
+  for (let i = 0; i < n - signature.length; i++) {
+    const sum = result.slice(i).reduce((acc, el) => acc + el, 0);
+    result.push(sum);
+  }
+
+  return result;
+}
+// console.log(Xbonacci([7, 3, 7, 0, 14, 20, 10, 7], 3)); // [7, 3, 7]
+// console.log(Xbonacci([1, 1], 10)); //[1,1,2,3,5,8,13,21,34,55]
+// console.log(Xbonacci([0, 0, 0, 0, 1], 10)); //[0,0,0,0,1,1,2,4,8,16]
+// console.log(Xbonacci([1, 0, 0, 0, 0, 0, 1], 10)); //[1,0,0,0,0,0,1,2,3,6]
+// console.log(Xbonacci([1, 0, 0, 0, 0, 0, 0, 0, 0, 0], 20)); //[1,0,0,0,0,0,0,0,0,0,1,1,2,4,8,16,32,64,128,256]
+// ? ---------------------------------------------------
+function solve(arr) {
+  return arr.filter((e, i) => arr.slice(i + 1).every((x) => x < e));
+  const result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let temp = false;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        temp = true;
+      } else {
+        temp = false;
+        break;
+      }
+    }
+    if (temp) {
+      result.push(arr[i]);
+    }
+  }
+
+  result.push(arr[arr.length - 1]);
+
+  return result;
+}
+// console.log(solve([16, 17, 14, 3, 14, 5, 2])); // [17,14,5,2]
+// console.log(solve([75, 47, 42, 56, 13, 55])); // [75,56,55]
+// console.log(solve([92, 52, 93, 31, 89, 87, 77, 105])); // [105]
+// console.log(solve([76, 17, 25, 36, 29])); //  [76,36,29]
+
+// ? -----------------------------------------------------
+/*
+Кошачьи годы
+15кошачьи годы для первого года
++9кошачьи годы для второго года
++4cat years за каждый последующий год
+Годы Собаки
+15собачьи годы для первого года
++9собачьи годы для второго года
++5собачьи годы за каждый последующий год
+*/
+var ownedCatAndDog = function (catYears, dogYears) {
+  return [
+    catYears < 24 ? catYears / 15 : (catYears - 16) / 4,
+    dogYears < 24 ? dogYears / 15 : (dogYears - 14) / 5,
+  ].map(Math.floor);
+};
+// console.log(ownedCatAndDog(97, 68)); //  [20, 10]
+// console.log(ownedCatAndDog(6, 36)); //  [0, 4]
+// console.log(ownedCatAndDog(23, 67)); // [1,10]
+
+// ? ----------------------------------------------------------
+/*
+7 kyu Linked Lists - Push & BuildOneTwoThree
+Связанные списки — Push & BuildOneTwoThree
+
+Напишите функции push() и buildOneTwoThree(), чтобы легко обновлять и 
+инициализировать связанные списки. 
+Попробуйте использовать функцию push() в вашей функции buildOneTwoThree().
+
+Вот пример использования push():
+
+var chained = null
+chained = push(chained, 3)
+chained = push(chained, 2)
+chained = push(chained, 1)
+push(chained, 8) === 8 -> 1 -> 2 -> 3 -> null
+Функция push принимает параметры head и data, где head — это либо объект узла, 
+либо значение null/None/nil. Ваша реализация push должна иметь возможность 
+создавать новый связанный список/узел, когда заголовок имеет значение null/None/nil.
+
+Функция buildOneTwoThree должна создавать и возвращать связанный список с 
+тремя узлами:1 -> 2 -> 3 -> null
+*/
+function Node(data) {
+  this.data = data;
+  this.next = null;
+}
+
+function push(head, data) {
+  // Создаём новый узел с переданными данными
+  const newNode = new Node(data);
+  // Устанавливаем его как голову списка и привязываем к нему текущий head
+  newNode.next = head;
+  return newNode;
+}
+
+function buildOneTwoThree() {
+  // Строим список 1 -> 2 -> 3 -> null, используя push
+  let head = null;
+  head = push(head, 3);
+  head = push(head, 2);
+  head = push(head, 1);
+  return head;
+}
+
+// console.log(push(null, 1).data) // 1
+// console.log(push(null, 1).next) // null
+// console.log(push(new Node(1), 2).data) // 2
+// console.log(push(new Node(1), 2).next.data) // 1
+// console.log(buildOneTwoThree().data) // 1
+// console.log(buildOneTwoThree().next.data) // 2
+// console.log(buildOneTwoThree().next.next.data) // 3
+// console.log(buildOneTwoThree().next.next.next) // null
+// ? ----------------------------------------------------------
+function last(...args) {
+  if (args.length === 1) {
+    const item = args[0];
+
+    if (Array.isArray(item) || typeof item === 'string') {
+      return item[item.length - 1];
+    }
+    return item;
+  }
+
+  return args[args.length - 1];
+}
+
+// console.log(last(5)); // 5
+// console.log(last('123')); // "3"
+// console.log(last([1, 2, 3])); // 3
+// console.log(last([1])); // 1
+// console.log(last([1, 2, 3, [4, 5]])); // [4, 5]
+// console.log(last(1, 2, 3)); // 3
+// console.log(last('a', 'b', 'c')); // 'c'
+// console.log(last([1], [2], [3])); // [3]
+// console.log(last(1, 2, 3, [4, 5])); // [4, 5]
+// ? ---------------------------------------------------
+// Функция вычшего порядка - левая свертка
+function chained(funcs) {
+  return function (input) {
+    return funcs.reduce((acc, fn) => fn(acc), input);
+  };
+}
+function a(x) {
+  return x + 1;
+}
+function b(x) {
+  return x * 2;
+}
+function c(x) {
+  return x ** 2;
+}
+function d(x) {
+  return x - 3;
+}
+
+const chainedFn = chained([a, b, c, d]);
+// console.log(chainedFn(2));
+// То же самое, что d(c(b(a(2))))
+// ? ----------------------------------------------------
+export function durationCalculate(start, end) {
+  // 1. Парсим параметры в объекты Date
+  const startTime = new Date(start);
+  const endTime = new Date(end);
+
+  // 2. Валидируем на валидность данных
+  if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+    throw new Error('Invalid date format. Please provide valid date strings.');
+  }
+
+  // 3. Считаем разницу в миллисекндах
+  const diffInMs = endTime.getTime() - startTime.getTime();
+
+  if (diffInMs < 0) {
+    throw new Error('End time must be after start time.');
+  }
+
+  // 4. Конвертируем миллисекнды в часы, минуты и секунды
+  const diffInSeconds = Math.floor(diffInMs / 1000);
+  const hours = Math.floor(diffInSeconds / 3600);
+  const minutes = Math.floor((diffInSeconds % 3600) / 60);
+  const seconds = diffInSeconds % 60;
+
+  // 5. Форматируем результат в HH:MM:SS
+  const formattedTime = [
+    hours.toString().padStart(2, '0'),
+    minutes.toString().padStart(2, '0'),
+    seconds.toString().padStart(2, '0'),
+  ].join(':');
+
+  return formattedTime;
+}
+
+console.log(durationCalculate('2025-01-23 09:00:00', '2025-01-24 00:16:00'));
+// ? --------------------------------------------------------------------------
+/*
+6 - Ball Upwards
+Вы бросаете мяч вертикально вверх с начальной скоростью v (in km per hour). 
+Высота h мяча в каждый момент времени t определяется выражением , 
+h = v*t - 0.5*g*t*t где g- сила тяжести Земли (g ~ 9.81 m/s**2). 
+Устройство регистрирует каждую десятую долю секунды высоту мяча. 
+Например, с помощью v = 15 km/h устройства получается что-то вроде следующего вида: 
+(0, 0.0), (1, 0.367...), (2, 0.637...), (3, 0.808...), (4, 0.881..) ... 
+где первое число - это время в десятых долях секунды, а второе число - высота в метрах.
+
+Задача
+Напишите функцию max_ballс параметром v (in km per hour), 
+которая возвращает time in tenth of second максимальную высоту, 
+зарегистрированную устройством.
+
+Примеры:
+max_ball(15) should return 4
+max_ball(25) should return 7
+
+Примечания
+Не забудьте при необходимости преобразовать скорость из км/ч в м/с или из м/с в км/ч.
+Максимальная высота, зафиксированная устройством, не обязательно является 
+максимальной высотой, достигнутой мячом.
+*/
+function maxBall(v0) {
+  const v0InMs = v0 * (1000 / 3600);
+  const g = 9.81;
+
+  let maxHeight = 0;
+  let tenthSec = 0;
+
+  for (let t = 0; ; t++) {
+    const timeSec = t / 10;
+    const h = v0InMs * timeSec - 0.5 * g * timeSec * timeSec;
+
+    if (h < 0) break;
+
+    if (h > maxHeight) {
+      maxHeight = h;
+      tenthSec = t;
+    }
+  }
+
+  return tenthSec;
+}
+
+// console.log(maxBall(15)); // 4
+// console.log(maxBall(37)); // 10
+// console.log(maxBall(45)); // 13
+// console.log(maxBall(99)); // 28
+// console.log(maxBall(85)); // 24
+//? -------------------------------------------
+/**
+ * 6 kyu Moves in squared strings (II)
+ * 
+ * Вам дана строка n строк, каждая подстрока которой состоит из n символов: Например:
+s = "abcd\nefgh\nijkl\nmnop"
+
+Мы рассмотрим некоторые преобразования этого квадрата строк.
+
+rot(s):
+Поворот часов на 180 градусов.
+rot(s) => "ponm\nlkji\nhgfe\ndcba"
+selfieAndRot:
+Это исходная строка, объединенная с ее версией, повернутой на 180 градусов по часовой стрелке, перемежаемой точками, пропорциональными длине сегментов, для лучшей иллюстрации поворота при печати.
+s = "abcd\nefgh\nijkl\nmnop" --> 
+"abcd....\nefgh....\nijkl....\nmnop....\n....ponm\n....lkji\n....hgfe\n....dcba"
+При печати эти функции работают следующим образом:
+
+|rot             |selfie_and_rot
+|abcd --> ponm   |abcd --> abcd....
+|efgh     lkji   |efgh     efgh....
+|ijkl     hgfe   |ijkl     ijkl....   
+|mnop     dcba   |mnop     mnop....
+                           ....ponm
+                           ....lkji
+                           ....hgfe
+                           ....dcba
+Обратите внимание, что количество точек соответствует общей длине «abcd», «efgh», «ijkl», «mnop».
+
+Задача:
+Напишите эти две функции rot и selfie_and_rot
+и функция высокого порядка, oper(fct, s) где:
+fct — это функция одной переменной f, применяемая к строке s (fct будет одним из rot, selfie_and_rot)
+
+Примеры:
+s = "abcd\nefgh\nijkl\nmnop"
+oper(rot, s) => "ponm\nlkji\nhgfe\ndcba"
+oper(selfie_and_rot, s) => "abcd....\nefgh....\nijkl....\nmnop....\n....ponm\n....lkji\n....hgfe\n....dcba"
+
+ */
+const s = 'abcd\nefgh\nijkl\nmnop';
+
+function rot(strng) {
+  let rotation = '';
+
+  for (let i = strng.length - 1; i >= 0; i--) {
+    rotation += strng[i];
+  }
+
+  return rotation;
+}
+function selfieAndRot(strng) {
+  const originStr = strng
+    .split('\n')
+    .map((el) => el.padEnd(el.length * 2, '.'))
+    .join('\n');
+  const rotStr = rot(strng)
+    .split('\n')
+    .map((el) => el.padStart(el.length * 2, '.'))
+    .join('\n');
+
+  return originStr + '\n' + rotStr;
+}
+function oper(fct, s) {
+  return fct(s);
+}
+
+// console.log(oper(selfieAndRot, s));
+// ? --------------------------------------------------------
+/**
+ * 6 kyu Playing on a chessboard
+ * 
+ * Мы с другом играли в такую ​​игру на шахматной доске (8 рядов, 8 столбцов). На первом ряду снизу мы расставляли цифры:
+1/2, 2/3, 3/4, 4/5, 5/6, 6/7, 7/8, 8/9
+
+Во 2-м ряду (2-й ряд снизу) имеем:
+1/3, 2/4, 3/5, 4/6, 5/7, 6/8, 7/9, 8/10
+
+В 3-м ряду:
+1/4, 2/5, 3/6, 4/7, 5/8, 6/9, 7/10, 8/11
+
+до последней строки:
+1/9, 2/10, 3/11, 4/12, 5/13, 6/14, 7/15, 8/16
+
+Когда все числа выстроены на шахматной доске, мы по очереди подбрасываем монетку. Тот, у кого выпадет «орёл», выигрывает, а другой игрок получает в долларах сумму чисел на доске . Мы играем ради удовольствия, доллары — из игры «Монополия»!
+
+Задача
+Сколько я (или мой друг) могу выиграть или проиграть в каждой партии, если шахматная доска состоит из n строк и n столбцов? Сложите все дробные значения на доске размером n на n и дайте ответ в виде упрощённой дроби.
+
+Далее:
+вернуть в стек числитель и знаменатель (даже если знаменатель равен 1)
+ */
+function game(n) {
+  if (n === 0) return [0];
+  return n % 2 === 0 ? [(n * n) / 2] : [n * n, 2];
+}
+
+console.log(game(0)); // [0]
+console.log(game(1)); // [1, 2]
+console.log(game(8)); // [32]
+//? ----------------------------------------------

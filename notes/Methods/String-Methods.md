@@ -917,6 +917,26 @@ function getChar(c) {
 // console.log(getChar(58)); // :
 // console.log(getChar(64)); // @
 // console.log(getChar(65)); // A
+
+// ? ----------------------------------------------------------------
+function moveTen(s) {
+  let result = '';
+
+  for (let i = 0; i < s.length; i++) {
+    let diff = 0;
+    if (s[i].charCodeAt() + 10 > 122) {
+      diff = 97 + (s[i].charCodeAt() + 9 - 122);
+      result += String.fromCharCode(diff);
+    } else {
+      result += String.fromCharCode(s[i].charCodeAt() + 10);
+    }
+  }
+  return result;
+}
+
+// console.log(moveTen('testcase')); // "docdmkco";
+// console.log(moveTen('codewars')); // "mynogkbc";
+// console.log(moveTen('exampletesthere')); // "ohkwzvodocdrobo";
 ==========================================================================
 =========================  ======================
 ==========================================================================

@@ -1,0 +1,18 @@
+{
+  "name": "codewars_katas",
+  "version": "1.0.0",
+  "description": "Some Codewars Katas Solution",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./js/in-progress.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "luxon": "^3.6.1"
+  }
+}
