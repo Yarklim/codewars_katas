@@ -7012,4 +7012,140 @@ function game(n) {
 console.log(game(0)); // [0]
 console.log(game(1)); // [1, 2]
 console.log(game(8)); // [32]
-//? ----------------------------------------------
+// ? ---------------------------------------------------------------
+/*
+5 kyu First Variation on Caesar Cipher
+
+Действие шифра Цезаря заключается в замене каждой буквы открытого текста 
+(буквы открытого текста — от «a» до «z» или от «A» до «Z») другой буквой на 
+фиксированное количество позиций выше или ниже по алфавиту.
+
+Эта программа выполняет вариацию сдвига Цезаря. Сдвиг увеличивается на 1 для каждого символа 
+(на каждой итерации).
+
+Если изначально сдвиг равен 1, то первый символ кодируемого сообщения будет сдвинут на 1, 
+второй символ будет сдвинут на 2 и т. д.
+
+Кодирование: Параметры и возврат функции "movingShift"
+param s: строка для кодирования
+
+параметр shift: целое число, дающее начальный сдвиг
+
+Функция «movingShift» сначала кодирует всю строку, а затем возвращает массив строк, 
+содержащий закодированную строку в пяти частях (пяти частях, потому что во избежание 
+дополнительных рисков закодированное сообщение будет передано пяти бегунам, по одной части 
+на каждого бегуна).
+
+Если возможно, сообщение будет поровну разделено по длине сообщения между пятью участниками. 
+Если это невозможно, части с 1 по 5 будут иметь последовательно невозрастающую длину, 
+так что части с 1 по 4 будут как минимум такими же длинными, как при равномерном разделении, 
+но как максимум на 1 длиннее. Если последняя часть является пустой строкой, 
+эта пустая строка должна быть показана в результирующем массиве.
+
+Например, если длина закодированного сообщения составляет 17, то пять частей будут иметь 
+длину 4, 4, 4, 4, 1. Части 1, 2, 3, 4 делятся поровну, а последняя часть длины 1 короче. 
+Если длина составляет 16, то части будут иметь длину 4, 4, 4, 4, 0. Части 1, 2, 3, 
+4 делятся поровну, и пятый бегун останется дома, так как его часть — пустая строка. 
+Если длина составляет 11, то равные части будут иметь длину 2,2, поэтому части будут 
+иметь длину 3, 3, 3, 2, 0.
+
+Вы также реализуете функцию «demovingShift» с двумя параметрами.
+
+Декодирование: параметры и возврат функции "demovingShift"
+массив строк: s (возможно, полученный в результате «movingShift», с 5 строками)
+
+сдвиг int
+
+«demovingShift» возвращает строку.
+
+Пример:
+u = "Я должен был знать, что у тебя найдется для меня идеальный ответ!!!"
+
+movingShift(u, 1)возвращает:
+
+v = ["J vltasl rlhr", "zdfog odxr ypw", "atasl rlhr p", "gwkzzyq zntyhv", "lvz wp!!!"]
+
+(кавычки добавлены для того, чтобы видеть строки и пробелы, ваша программа не будет 
+записывать эти кавычки, см. Примеры тестовых случаев)
+
+и demovingShift(v, 1)возвращает u. #Ref:
+*/
+function movingShift(s, shift) {
+  let encoded = '';
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    const sh = shift + i;
+    if (c >= 'a' && c <= 'z') {
+      encoded += String.fromCharCode(((c.charCodeAt(0) - 97 + sh) % 26) + 97);
+    } else if (c >= 'A' && c <= 'Z') {
+      encoded += String.fromCharCode(((c.charCodeAt(0) - 65 + sh) % 26) + 65);
+    } else {
+      encoded += c;
+    }
+  }
+
+  const n = encoded.length;
+  const len4 = Math.ceil(n / 5);
+  const total4 = len4 * 4;
+
+  if (total4 <= n) {
+    return [
+      encoded.slice(0, len4),
+      encoded.slice(len4, len4 * 2),
+      encoded.slice(len4 * 2, len4 * 3),
+      encoded.slice(len4 * 3, len4 * 4),
+      encoded.slice(len4 * 4),
+    ];
+  } else {
+    const base = Math.floor(n / 5);
+    const extra = n % 5;
+    const parts = [];
+    let pos = 0;
+    for (let i = 0; i < 5; i++) {
+      const len = i < extra ? base + 1 : base;
+      parts.push(encoded.slice(pos, pos + len));
+      pos += len;
+    }
+    return parts;
+  }
+}
+
+function demovingShift(arr, shift) {
+  const s = arr.join('');
+  let decoded = '';
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    const sh = shift + i;
+    if (c >= 'a' && c <= 'z') {
+      decoded += String.fromCharCode(
+        ((((c.charCodeAt(0) - 97 - sh) % 26) + 26) % 26) + 97
+      );
+    } else if (c >= 'A' && c <= 'Z') {
+      decoded += String.fromCharCode(
+        ((((c.charCodeAt(0) - 65 - sh) % 26) + 26) % 26) + 65
+      );
+    } else {
+      decoded += c;
+    }
+  }
+  return decoded;
+}
+
+// console.log(
+//   movingShift(
+//     'I should have known that you would have a perfect answer for me!!!',
+//     1
+//   )
+// ); // "J vltasl rlhr ", "zdfog odxr ypw", " atasl rlhr p ", "gwkzzyq zntyhv", " lvz wp!!!"
+// console.log(
+//   demovingShift(
+//     [
+//       'J vltasl rlhr ',
+//       'zdfog odxr ypw',
+//       ' atasl rlhr p ',
+//       'gwkzzyq zntyhv',
+//       ' lvz wp!!!',
+//     ],
+//     1
+//   )
+// ); // 'I should have known that you would have a perfect answer for me!!!'
