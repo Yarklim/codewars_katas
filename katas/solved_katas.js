@@ -1333,7 +1333,7 @@ String.prototype.toJadenCase = function () {
 String.prototype.toAlternatingCase = function () {
   return this.split('')
     .map((el) =>
-      el === el.toUpperCase() ? el.toLowerCase() : el.toUpperCase()
+      el === el.toUpperCase() ? el.toLowerCase() : el.toUpperCase(),
     )
     .join('');
 };
@@ -1474,7 +1474,7 @@ function towerBuilder(nFloors) {
   //   return arr;
   return [...Array(n)].map(
     (_, i) =>
-      ' '.repeat(n - 1 - i) + '*'.repeat(i * 2 + 1) + ' '.repeat(n - 1 - i)
+      ' '.repeat(n - 1 - i) + '*'.repeat(i * 2 + 1) + ' '.repeat(n - 1 - i),
   );
 }
 
@@ -2755,8 +2755,8 @@ function rot13(message) {
   const rot13 = (str) =>
     str.replace(/[a-z]/gi, (letter) =>
       String.fromCharCode(
-        letter.charCodeAt(0) + (letter.toLowerCase() <= 'm' ? 13 : -13)
-      )
+        letter.charCodeAt(0) + (letter.toLowerCase() <= 'm' ? 13 : -13),
+      ),
     );
 }
 // console.log(rot13('a1b3c4')); // 'n1o3p4'
@@ -3565,7 +3565,7 @@ const reachesDepartment = departmentList.reduce(
     }
     return acc;
   },
-  departmentList[0]
+  departmentList[0],
 );
 // console.log(reachesDepartment.name);
 //? ==============================================
@@ -3775,7 +3775,7 @@ function gimme(triplet) {
   return a.indexOf(
     a.concat().sort(function (a, b) {
       return a - b;
-    })[1]
+    })[1],
   );
 }
 
@@ -4198,10 +4198,10 @@ function mxdiflg(a1, a2) {
         acc,
         a2.reduce(
           (acc2, item2) => Math.max(acc2, Math.abs(item.length - item2.length)),
-          -1
-        )
+          -1,
+        ),
       ),
-    -1
+    -1,
   );
 }
 // console.log(
@@ -4269,13 +4269,13 @@ function decipherThis(str) {
     .map((w) =>
       w
         .replace(/^\d+/, (c) => String.fromCharCode(c))
-        .replace(/^(.)(.)(.*)(.)$/, '$1$4$3$2')
+        .replace(/^(.)(.)(.*)(.)$/, '$1$4$3$2'),
     )
     .join(' ');
 }
 
 console.log(
-  decipherThis('72eva 97 103o 97t 116sih 97dn 115ee 104wo 121uo 100o')
+  decipherThis('72eva 97 103o 97t 116sih 97dn 115ee 104wo 121uo 100o'),
 ); // 'Have a go at this and see how you do'
 console.log(decipherThis('72olle 103doo 100ya')); // 'Hello good day'
 console.log(decipherThis('82yade 115te 103o')); // 'Ready set go'
@@ -4382,8 +4382,8 @@ function solve(s) {
   return upperLetter > lowerLetter
     ? s.toUpperCase()
     : upperLetter < lowerLetter
-    ? s.toLowerCase()
-    : s.toLowerCase();
+      ? s.toLowerCase()
+      : s.toLowerCase();
 }
 
 console.log(solve('code')); // "code"
@@ -5377,8 +5377,8 @@ function solve(s) {
       .map((el) =>
         el
           .split('')
-          .reduce((sum, letter) => sum + (letter.charCodeAt() - 96), 0)
-      )
+          .reduce((sum, letter) => sum + (letter.charCodeAt() - 96), 0),
+      ),
   );
 }
 // console.log(solve('mischtschenkoana')); // 57
@@ -5464,8 +5464,8 @@ function isSortedAndHow(arr) {
   return arr.every((el, i) => i === 0 || arr[i] >= arr[i - 1])
     ? 'yes, ascending'
     : arr.every((el, i) => i === 0 || arr[i] <= arr[i - 1])
-    ? 'yes, descending'
-    : 'no';
+      ? 'yes, descending'
+      : 'no';
 
   let ascending = array.filter((e, i, a) => e > a[i + 1]).length == 0;
   let descending = array.filter((e, i, a) => e < a[i + 1]).length == 0;
@@ -5981,7 +5981,7 @@ function revrot(str, sz) {
 const MATRIX_WIDTH = 3;
 const MATRIX_HEIGTH = 3;
 const matrix = Array.from({ length: MATRIX_WIDTH }).map(() =>
-  Array.from({ length: MATRIX_HEIGTH }).map((_) => '*')
+  Array.from({ length: MATRIX_HEIGTH }).map((_) => '*'),
 );
 
 // console.log(matrix);
@@ -6023,7 +6023,7 @@ function travel(r, zipcode) {
   const number = filterAd.map((el) => parseInt(el));
   const address = filterAd
     .map((el, i) =>
-      el.slice(String(number[i]).length + 1).replace(` ${zipcode}`, '')
+      el.slice(String(number[i]).length + 1).replace(` ${zipcode}`, ''),
     )
     .join(',');
 
@@ -6332,7 +6332,7 @@ function stat(strg) {
       if (idx === 0) return acc + i * 3600;
       if (idx === 1) return acc + i * 60;
       return acc + Number(i);
-    }, 0)
+    }, 0),
   );
 
   const sortedResults = resultsInSeconds.sort((a, b) => a - b);
@@ -6361,7 +6361,7 @@ function stat(strg) {
   };
 
   return `Range: ${convertToString(range)} Average: ${convertToString(
-    average
+    average,
   )} Median: ${convertToString(median)}`;
 }
 
@@ -6467,15 +6467,15 @@ console.log(
   rank(
     'Lagon,Joshua,Naoh,Sophia,Michael,Grace,Sofia,Aubrey,Logan,Emily,Abigail,Matthew,Willaim,James,Olivia,David,Emma',
     [2, 6, 2, 5, 4, 1, 6, 6, 3, 3, 1, 3, 1, 3, 3, 6, 3],
-    12
-  )
+    12,
+  ),
 ); // 'Lagon'
 console.log(
   rank(
     'Ella,Benjamin,Chloe,Willaim,Michael,Elijah,Mason,Grace,Emma,Olivia,William,Liam,Lagon,Olivai,Logan,David,Joshua,Ethan,Sophia,Matthew,Aiden,Noah,Avery',
     [4, 2, 6, 2, 2, 5, 1, 3, 6, 4, 6, 3, 6, 3, 6, 3, 5, 4, 1, 3, 2, 2, 5],
-    5
-  )
+    5,
+  ),
 ); // 'Logan'
 
 // ? ------------------------------------------------------------------------
@@ -6533,7 +6533,7 @@ console.log(multiplyLargeNumbers('2', '3')); // "6"
 console.log(multiplyLargeNumbers('30', '69')); // "2070"
 console.log(multiplyLargeNumbers('11', '85')); // "935"
 console.log(
-  multiplyLargeNumbers('12345678901234567890', '98765432109876543210')
+  multiplyLargeNumbers('12345678901234567890', '98765432109876543210'),
 ); // "1219326311370217952237463801111263526900"
 
 // ? -----------------------------------------------------------
@@ -6593,8 +6593,8 @@ function sorter(textbooks) {
     a.toLowerCase() > b.toLowerCase()
       ? 1
       : a.toLowerCase() < b.toLowerCase()
-      ? -1
-      : 0
+        ? -1
+        : 0,
   );
 }
 //   console.log(sorter(['**english', '$istory', 'Alg#bra', 'Geom^try'])); // [ '$istory', '**english', 'Alg#bra', 'Geom^try' ]
@@ -7118,11 +7118,11 @@ function demovingShift(arr, shift) {
     const sh = shift + i;
     if (c >= 'a' && c <= 'z') {
       decoded += String.fromCharCode(
-        ((((c.charCodeAt(0) - 97 - sh) % 26) + 26) % 26) + 97
+        ((((c.charCodeAt(0) - 97 - sh) % 26) + 26) % 26) + 97,
       );
     } else if (c >= 'A' && c <= 'Z') {
       decoded += String.fromCharCode(
-        ((((c.charCodeAt(0) - 65 - sh) % 26) + 26) % 26) + 65
+        ((((c.charCodeAt(0) - 65 - sh) % 26) + 26) % 26) + 65,
       );
     } else {
       decoded += c;
@@ -7149,3 +7149,733 @@ function demovingShift(arr, shift) {
 //     1
 //   )
 // ); // 'I should have known that you would have a perfect answer for me!!!'
+//? -------------------------------------------------
+/**
+ * 5 kyu Factorial decomposition
+ *Целью ката является разложение n!(факториала n) на его простые множители.
+
+Примеры:
+
+n = 12; decomp(12) -> "2^10 * 3^5 * 5^2 * 7 * 11"
+since 12! is divisible by 2 ten times, by 3 five times, by 5 two times and by 7 and 11 only once.
+
+n = 22; decomp(22) -> "2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19"
+
+n = 25; decomp(25) -> 2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23
+Простые числа должны располагаться в порядке возрастания. Если показатель степени простого числа равен 1, показатель степени не ставится.
+
+Примечания:
+Функция является decomp(n)и должна возвращать разложение n! на простые множители в порядке возрастания простых чисел в виде строки.
+Факториал может быть очень большим числом ( 4000! has 12674 digitsn может принимать значения от 300 до 4000).
+ */
+function decomp(n) {
+  const isPrime = (num) => {
+    if (num < 2) return false;
+    for (let i = 2; i * i <= num; i++) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  };
+
+  const factors = new Map();
+
+  for (let i = 2; i <= n; i++) {
+    if (isPrime(i)) {
+      let count = 0;
+      let key = i;
+      while (key <= n) {
+        count += Math.floor(n / key);
+        key *= i;
+      }
+      if (count > 0) {
+        factors.set(i, count);
+      }
+    }
+  }
+
+  return Array.from(factors)
+    .map(([key, val]) => (val === 1 ? key : `${key}^${val}`))
+    .join(' * ');
+}
+
+// console.log(decomp(12)); // "2^10 * 3^5 * 5^2 * 7 * 11"
+// console.log(decomp(17)); // "2^15 * 3^6 * 5^3 * 7^2 * 11 * 13 * 17"
+// console.log(decomp(5)); // "2^3 * 3 * 5"
+// console.log(decomp(22)); // "2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19"
+// console.log(decomp(14)); // "2^11 * 3^5 * 5^2 * 7^2 * 11 * 13"
+// console.log(decomp(25)); // "2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23"
+
+//? ----------------------------------------------------------------------------
+/**
+ * 5 kyu Integers: Recreation One
+ 
+ 1, 246, 2, 123, 3, 82, 6, 41 являются делителями числа 246.
+Возводя эти делители в квадрат, получаем: 1, 60516, 4, 15129, 9, 6724, 36, 1681.
+Сумма этих квадратов 84100 равна 290 * 290.
+Задача
+Найдите все целые числа между m и n (m и n — целые числа, причем 1 <= m <= n) такие, что сумма квадратов их делителей сама является квадратом.
+Мы вернем массив подмассивов.
+Подмассивы будут иметь два элемента: сначала число, квадраты делителей которого являются квадратами, а затем сумма квадратов делителей.
+
+Пример:
+m =  1, n = 250 --> [[1, 1], [42, 2500], [246, 84100]]
+m = 42, n = 250 --> [[42, 2500], [246, 84100]]
+ */
+function listSquared(m, n) {
+  const result = [];
+
+  const getSumOfSquaredDivisors = (num) => {
+    let sum = 0;
+
+    const sqrtNum = Math.sqrt(num);
+
+    for (let i = 1; i <= sqrtNum; i++) {
+      if (num % i === 0) {
+        sum += i * i;
+
+        const otherDivisor = num / i;
+        if (otherDivisor !== i) {
+          sum += otherDivisor * otherDivisor;
+        }
+      }
+    }
+
+    return sum;
+  };
+
+  for (let num = m; num <= n; num++) {
+    const sumOfSquares = getSumOfSquaredDivisors(num);
+
+    const sqrt = Math.sqrt(sumOfSquares);
+    if (Number.isInteger(sqrt)) {
+      result.push([num, sumOfSquares]);
+    }
+  }
+
+  return result;
+}
+
+// console.log(listSquared(1, 250)); // [[1, 1], [42, 2500], [246, 84100]]
+// console.log(listSquared(42, 250)); // [[42, 2500], [246, 84100]]
+// console.log(listSquared(250, 500)); // [[287, 84100]]
+//? ------------------------------------------------------------------
+/*
+5 kyu
+Common Denominators
+
+Общие знаменатели
+
+У вас будет список рациональных чисел в виде
+
+{ {numer_1, denom_1} , ... {numer_n, denom_n} } 
+or
+[ [numer_1, denom_1] , ... [numer_n, denom_n] ] 
+or
+[ (numer_1, denom_1) , ... (numer_n, denom_n) ] 
+где все числа являются положительными целыми числами. 
+Вы должны получить результат в виде:
+
+(N_1, D) ... (N_n, D) 
+or
+[ [N_1, D] ... [N_n, D] ] 
+or
+[ (N_1', D) , ... (N_n, D) ] 
+or
+{{N_1, D} ... {N_n, D}} 
+or
+"(N_1, D) ... (N_n, D)"
+в зависимости от языка (см. примеры тестов), в котором D как можно меньше и
+
+N_1/D == numer_1/denom_1 ... N_n/D == numer_n,/denom_n.
+Пример:
+convertFracs [(1, 2), (1, 3), (1, 4)] `shouldBe` [(6, 12), (4, 12), (3, 12)]
+Примечание:
+В связи с тем, что первые переводы были написаны давно - более 6 лет 
+- в этих первых переводах есть только несократимые дроби.
+
+В более новых переводах есть некоторые сократимые дроби. 
+Чтобы быть в безопасности, лучше проделать немного больше работы, упростив дроби, 
+даже если это не обязательно.
+*/
+
+function convertFrac(lst) {
+  if (lst.length === 0) {
+    return '';
+  }
+
+  const simplified = lst.map(([numer, denom]) => {
+    const g = greatestCommonDivisor(numer, denom);
+    return [numer / g, denom / g];
+  });
+
+  let commonDenom = simplified[0][1];
+  for (let i = 1; i < simplified.length; i++) {
+    commonDenom = leastCommonMultiple(commonDenom, simplified[i][1]);
+  }
+
+  const result = simplified.map(([numer, denom]) => {
+    const multiplier = commonDenom / denom;
+    const newNumer = numer * multiplier;
+    return `(${newNumer},${commonDenom})`;
+  });
+
+  return result.join('');
+}
+
+const greatestCommonDivisor = (a, b) => {
+  while (b !== 0) {
+    const temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+};
+
+const leastCommonMultiple = (a, b) => {
+  return (a * b) / greatestCommonDivisor(a, b);
+};
+
+//? --------------------------------------------------------
+/**
+ * 5 kyu What's a Perfect Power anyway?
+Совершенная степень — это классификация положительных целых чисел:
+В математике совершенная степень — это положительное целое число, которое может быть выражено как целая степень другого положительного целого числа.
+Более формально, n является совершенной степенью, если существуют натуральные числа m > 1 и k > 1 такие, что m k = n.
+
+Ваша задача — проверить, является ли заданное целое число полной степенью. Если это полная степень, верните пару mи kс m k = n в качестве доказательства.
+В противном случае верните Nothing, Nil, null, NULL, Noneили эквивалент на вашем языке программирования.
+
+Примечание: Для полной степени может существовать несколько пар. Например 81 = 3^4 = 9^2, , поэтому (3,4)и (9,2)являются допустимыми решениями.
+Однако проверки учитывают это, поэтому, если число является полной степенью, возвращается любая пара, которая это доказывает.
+
+Примеры
+describe("perfect powers", function(){
+  it("should work for some examples",function(){
+    assert.deepEqual(isPP(4), [2,2], "4 = 2^2");
+    assert.deepEqual(isPP(9), [3,2], "9 = 3^2");
+    assert.strictEqual(isPP(5), null, "5 isn't a perfect number");
+  });
+});
+ */
+
+function isPP(n) {
+  const maxK = Math.floor(Math.log2(n));
+
+  for (let k = 2; k <= maxK; k++) {
+    const m = Math.round(Math.pow(n, 1 / k));
+
+    if (Math.pow(m, k) === n) {
+      return [m, k];
+    }
+  }
+
+  return null;
+}
+//? -------------------------------------------------------------------------------
+/**
+ * 4 kyu Connect Four
+
+Ознакомьтесь с описанием игры «Четыре в ряд» в Википедии:
+Вики «Соедини четыре»
+Сетка состоит из 6 строк и 7 столбцов, которые обозначены буквами от A до G.
+Вы получите список строк, показывающий порядок выпавших элементов в столбцах:
+  piecesPositionList = ["A_Red",
+                        "B_Yellow",
+                        "A_Red",
+                        "B_Yellow",
+                        "A_Red",
+                        "B_Yellow",
+                        "G_Red",
+                        "B_Yellow"]
+Список может содержать до 42 ходов и показывает порядок действий игроков.
+Побеждает тот игрок, который первым соединит четыре предмета одного цвета.
+Вам следует вернуть «Желтый», «Красный» или «Рисовать» соответственно.
+ */
+
+function whoIsWinner(piecesPositionList) {
+  const rows = 6;
+  const cols = 7;
+  const board = Array(rows)
+    .fill(null)
+    .map(() => Array(cols).fill(null));
+
+  const columnMap = {
+    A: 0,
+    B: 1,
+    C: 2,
+    D: 3,
+    E: 4,
+    F: 5,
+    G: 6,
+  };
+
+  for (const move of piecesPositionList) {
+    const [column, color] = move.split('_');
+    const col = columnMap[column];
+
+    for (let row = rows - 1; row >= 0; row--) {
+      if (board[row][col] === null) {
+        board[row][col] = color;
+
+        if (checkWinner(board, row, col, color)) {
+          return color;
+        }
+        break;
+      }
+    }
+  }
+
+  return 'Draw';
+}
+
+function checkWinner(board, row, col, color) {
+  if (
+    countInDirection(board, row, col, color, 0, 1) +
+      countInDirection(board, row, col, color, 0, -1) +
+      1 >=
+    4
+  ) {
+    return true;
+  }
+
+  if (
+    countInDirection(board, row, col, color, 1, 0) +
+      countInDirection(board, row, col, color, -1, 0) +
+      1 >=
+    4
+  ) {
+    return true;
+  }
+
+  if (
+    countInDirection(board, row, col, color, 1, 1) +
+      countInDirection(board, row, col, color, -1, -1) +
+      1 >=
+    4
+  ) {
+    return true;
+  }
+
+  if (
+    countInDirection(board, row, col, color, -1, 1) +
+      countInDirection(board, row, col, color, 1, -1) +
+      1 >=
+    4
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function countInDirection(board, row, col, color, dRow, dCol) {
+  let count = 0;
+  let r = row + dRow;
+  let c = col + dCol;
+
+  while (r >= 0 && r < board.length && c >= 0 && c < board[0].length) {
+    if (board[r][c] === color) {
+      count++;
+      r += dRow;
+      c += dCol;
+    } else {
+      break;
+    }
+  }
+
+  return count;
+}
+//? ---------------------------------------------------------------
+/**
+ * 4 kyu Human readable duration format
+ 
+Ваша задача для выполнения этого задания — написать функцию, которая форматирует заданную продолжительность в секундах в удобном для человека виде.
+
+Функция должна принимать неотрицательное целое число. Если оно равно нулю, она просто возвращает "now". 
+В противном случае длительность выражается как комбинация years, days, hours, minutesи seconds.
+
+На примере это гораздо проще понять:
+
+* For seconds = 62, your function should return 
+    "1 minute and 2 seconds"
+* For seconds = 3662, your function should return
+    "1 hour, 1 minute and 2 seconds"
+Для целей данной Каты год равен 365 дням, а сутки — 24 часам.
+
+Обратите внимание, что пробелы важны.
+
+Подробные правила
+Полученное выражение состоит из таких компонентов, как 4 seconds, 1 year, и т. д. 
+В общем случае, это положительное целое число и одна из допустимых единиц времени, разделенные пробелом. 
+Единица времени используется во множественном числе, если целое число больше 1.
+
+Компоненты разделены запятой и пробелом ( ", "). 
+За исключением последнего компонента, который отделен запятой " and ", как это написано по-английски.
+
+Более значимые промежутки времени наступят раньше, чем наименее значимые. 
+Следовательно, 1 second and 1 yearэто неверно, но 1 year and 1 secondэто верно.
+
+Разные компоненты имеют разные единицы измерения времени. Поэтому здесь нет повторяющихся единиц, как в 5 seconds and 1 second.
+
+Компонент вообще не отобразится, если его значение равно нулю. 
+Следовательно, 1 minute and 0 secondsэто недопустимо, должно быть просто 1 minute.
+
+Единица времени должна использоваться «по возможности».
+Это означает, что функция не должна возвращать значение 61 seconds, а 1 minute and 1 second вместо этого. 
+Формально, длительность компонента, заданная параметром, не должна превышать любую допустимую более значимую единицу времени.
+ */
+function formatDuration(seconds) {
+  if (seconds === 0) {
+    return 'now';
+  }
+
+  const units = [
+    { name: 'year', value: 365 * 24 * 60 * 60 },
+    { name: 'day', value: 24 * 60 * 60 },
+    { name: 'hour', value: 60 * 60 },
+    { name: 'minute', value: 60 },
+    { name: 'second', value: 1 },
+  ];
+
+  const components = [];
+  let remaining = seconds;
+
+  for (const unit of units) {
+    if (remaining >= unit.value) {
+      const count = Math.floor(remaining / unit.value);
+      remaining = remaining % unit.value;
+
+      const unitName = count === 1 ? unit.name : unit.name + 's';
+      components.push(`${count} ${unitName}`);
+    }
+  }
+
+  if (components.length === 1) {
+    return components[0];
+  } else if (components.length === 2) {
+    return components.join(' and ');
+  } else {
+    const allButLast = components.slice(0, -1).join(', ');
+    const last = components[components.length - 1];
+    return `${allButLast} and ${last}`;
+  }
+}
+//? -----------------------------------------------------------------------------
+/*
+4 kyu Explosive Sum
+
+Сколькими способами можно получить сумму чисел?
+Из Википедии: https://en.wikipedia.org/wiki/Partition_(number_theory)
+
+В теории чисел и комбинаторике разбиение натурального числа n , 
+также называемое целочисленным разбиением , — это способ записи n в виде суммы 
+положительных целых чисел. Две суммы, отличающиеся только порядком слагаемых, 
+считаются одним и тем же разбиением. Если порядок имеет значение, сумма становится 
+композицией. Например, число 4 можно разделить пятью различными способами:
+
+4
+3 + 1
+2 + 2
+2 + 1 + 1
+1 + 1 + 1 + 1
+Примеры
+Базовый
+sum(1) // 1
+sum(2) // 2  -> 1+1 , 2
+sum(3) // 3 -> 1+1+1, 1+2, 3
+sum(4) // 5 -> 1+1+1+1, 1+1+2, 1+3, 2+2, 4
+sum(5) // 7 -> 1+1+1+1+1, 1+1+1+2, 1+1+3, 1+2+2, 1+4, 5, 2+3
+
+sum(10) // 42
+Взрывной
+sum(50) // 204226
+sum(80) // 15796476
+sum(100) // 190569292
+*/
+function sum(num) {
+  // Решение использует динамическое программирование
+  // dp[i] = количество способов разбить число i на сумму положительных чисел
+
+  // Инициализируем массив нулями
+  const dp = new Array(num + 1).fill(0);
+
+  // Базовый случай: есть ровно один способ разбить 0 (пустое разбиение)
+  dp[0] = 1;
+
+  // Для каждого числа i от 1 до num
+  // Мы добавляем разбиения, которые используют число i
+  for (let i = 1; i <= num; i++) {
+    // Обновляем все dp[j], где j >= i
+    // dp[j] += dp[j - i] означает:
+    // "добавляем число i к каждому разбиению числа (j - i)"
+    for (let j = i; j <= num; j++) {
+      dp[j] += dp[j - i];
+    }
+  }
+
+  // Возвращаем количество способов разбить num
+  return dp[num];
+}
+
+/* 
+Как работает алгоритм:
+
+Идея: Строим разбиения постепенно, добавляя возможность использовать 
+числа 1, 2, 3, ..., n по очереди.
+
+Пример для sum(4):
+
+Шаг 0: dp = [1, 0, 0, 0, 0]
+  dp[0] = 1 (пустое разбиение)
+
+Шаг 1: Добавляем разбиения, использующие 1
+  dp = [1, 1, 1, 1, 1]
+  Теперь можем разбить: 1, 1+1, 1+1+1, 1+1+1+1
+
+Шаг 2: Добавляем разбиения, использующие 2
+  dp = [1, 1, 2, 2, 3]
+  Новые разбиения: 2, 2+1, 2+2, 2+1+1
+
+Шаг 3: Добавляем разбиения, использующие 3
+  dp = [1, 1, 2, 3, 4]
+  Новое разбиение: 3, 3+1
+
+Шаг 4: Добавляем разбиения, использующие 4
+  dp = [1, 1, 2, 3, 5]
+  Новое разбиение: 4
+
+Итого: 5 разбиений числа 4:
+  1. 4
+  2. 3 + 1
+  3. 2 + 2
+  4. 2 + 1 + 1
+  5. 1 + 1 + 1 + 1
+
+Сложность:
+- Время: O(n²) - два вложенных цикла
+- Память: O(n) - массив dp размером n+1
+*/
+// console.log(sum(1)) // 1
+// console.log(sum(4)) // 5
+// console.log(sum(10)) // 42
+// console.log(sum(50)) // 204226
+// ? -------------------------------------------------------
+/*
+4 kyu Square into Squares. Protect trees!
+
+Учитывая положительное целое число n, вернуть строго возрастающую 
+последовательность чисел (список/массив/строку в зависимости от языка) так, 
+чтобы сумма квадратов была равна n².
+
+Если решений несколько (а они будут), верните, насколько это возможно, 
+результат с максимально возможными значениями:
+
+Примеры
+decompose(11)должен вернуться [1,2,4,10]. Обратите внимание, 
+что на самом деле существует два способа разложить 
+11²: 11² = 121 = 1 + 4 + 16 + 100 = 1² + 2² + 4² + 10², 
+но не возвращать результат [2,6,9], поскольку 9 меньше 10.
+
+For decompose(50)не возвращать [1, 1, 4, 9, 49], но [1, 3, 5, 8, 49] 
+поскольку [1, 1, 4, 9, 49] не образует строго возрастающую последовательность.
+
+Примечание
+Ни то [n], ни другое не [1,1,1,…,1]являются действительными решениями. 
+Если допустимого решения не существует, верните nil, null,
+*/
+function decompose(n) {
+  const result = helper(n * n, n - 1);
+
+  return result;
+}
+
+function helper(remaining, maxNum) {
+  if (remaining === 0) {
+    return [];
+  }
+
+  if (remaining < 0 || maxNum <= 0) {
+    return null;
+  }
+
+  for (let i = maxNum; i >= 1; i--) {
+    const square = i * i;
+
+    if (square > remaining) {
+      continue;
+    }
+
+    const subResult = helper(remaining - square, i - 1);
+
+    if (subResult !== null) {
+      subResult.push(i);
+      return subResult;
+    }
+  }
+
+  return null;
+}
+
+/*
+Объяснение алгоритма:
+
+Пример: decompose(5) → разложить 25 на сумму квадратов
+
+1. Пробуем 4: 4² = 16, остаётся 25 - 16 = 9
+   - Пробуем 3: 3² = 9, остаётся 9 - 9 = 0 ✓
+   - Нашли решение: [3, 4]
+
+Пример: decompose(11) → разложить 121 на сумму квадратов
+
+1. Пробуем 10: 10² = 100, остаётся 121 - 100 = 21
+   - Пробуем 4: 4² = 16, остаётся 21 - 16 = 5
+     - Пробуем 2: 2² = 4, остаётся 5 - 4 = 1
+       - Пробуем 1: 1² = 1, остаётся 1 - 1 = 0 ✓
+       - Нашли решение: [1, 2, 4, 10]
+
+Почему алгоритм находит наибольшие значения?
+- Мы пробуем числа от большего к меньшему (maxNum, maxNum-1, ..., 1)
+- Первое найденное решение будет содержать максимально большие числа
+
+Почему последовательность строго возрастающая?
+- При рекурсии используем maxNum = i - 1, что гарантирует,
+  что следующие числа будут строго меньше i
+
+Сложность:
+- В худшем случае экспоненциальная, но с отсечениями работает быстро
+- На практике очень эффективен благодаря backtracking и оптимизациям
+*/
+// console.log(decompose(11)); // [1,2,4,10]
+// console.log(decompose(50)); // [1, 3, 5, 8, 49]
+// console.log(decompose(5)); // [3, 4]
+
+//? ---------------------------------------------------------------------
+/*
+4 kyu Strings Mix
+
+Учитывая две строки s1 и s2, мы хотим визуализировать, насколько они различаются. 
+Мы будем учитывать только строчные буквы (от а до z). Сначала посчитаем частоту встречаемости каждой строчной буквы в s1 и s2.
+
+s1 = "A aaaa bb c"
+
+s2 = "& aaa bbb c d"
+
+s1 has 4 'a', 2 'b', 1 'c'
+
+s2 has 3 'a', 3 'b', 1 'c', 1 'd'
+
+Таким образом, максимум для «a» в s1 и s2 равен 4 из s1; максимум для 'b' равен 3 от s2. 
+В дальнейшем мы не будем рассматривать буквы, максимум их вхождений которых меньше или равен 1.
+
+Мы можем возобновить различия между s1 и s2 в следующей строке: "1:aaaa/2:bbb" 
+где 1 in 1:aaaa означает строку s1 и aaaa потому что максимум for aравен 4. 
+Таким же образом 2:bbb обозначается строка s2 и bbb потому что максимум for bравен 3.
+
+Задача состоит в том, чтобы создать строку, в которой каждая строчная буква s1 или s2 встречается столько раз, 
+сколько ее максимум, если этот максимум строго больше 1 ; перед этими буквами будет стоять номер строки, 
+в которой они встречаются, с максимальным значением и :. 
+Если максимум находится в s1, а также в s2, префикс равен =:.
+
+В результате подстроки (например, подстрока 2:nnnnn или 1:hhh; она содержит префикс) будут располагаться 
+в порядке убывания своей длины, а при одинаковой длине - в возрастающем лексикографическом порядке 
+(буквы и цифры - подробнее точно отсортировано по коду); разные группы будут разделены символом «/».
+*/
+
+function mix(s1, s2) {
+  const freq1 = getFrequency(s1);
+  const freq2 = getFrequency(s2);
+
+  const allLetters = new Set([...Object.keys(freq1), ...Object.keys(freq2)]);
+
+  const groups = [];
+
+  for (const letter of allLetters) {
+    const count1 = freq1[letter] || 0;
+    const count2 = freq2[letter] || 0;
+    const maxCount = Math.max(count1, count2);
+
+    if (maxCount > 1) {
+      let prefix;
+
+      if (count1 === count2) {
+        prefix = '=';
+      } else if (count1 > count2) {
+        prefix = '1';
+      } else {
+        prefix = '2';
+      }
+
+      const substring = `${prefix}:${letter.repeat(maxCount)}`;
+      groups.push({
+        substring: substring,
+        length: maxCount,
+        prefix: prefix,
+        letter: letter,
+      });
+    }
+  }
+
+  groups.sort((a, b) => {
+    if (a.length !== b.length) {
+      return b.length - a.length;
+    }
+
+    if (a.substring < b.substring) return -1;
+    if (a.substring > b.substring) return 1;
+    return 0;
+  });
+
+  return groups.map((g) => g.substring).join('/');
+}
+
+function getFrequency(s) {
+  const freq = {};
+
+  for (const char of s) {
+    if (char >= 'a' && char <= 'z') {
+      freq[char] = (freq[char] || 0) + 1;
+    }
+  }
+
+  return freq;
+}
+
+/*
+Пример работы:
+
+s1 = "Are they here"
+s2 = "yes, they are here"
+
+Частоты:
+s1: e=4, h=2, r=2, t=1, y=1
+s2: e=5, h=2, r=2, y=2, a=1, s=1, t=1
+
+Группы (maxCount > 1):
+- e: max=5 (из s2) → "2:eeeee"
+- h: max=2 (одинаково) → "=:hh"
+- r: max=2 (одинаково) → "=:rr"
+- y: max=2 (из s2) → "2:yy"
+
+Сортировка:
+1. По длине: 
+   - "2:eeeee" (len=5)
+   - "2:yy" (len=2)
+   - "=:hh" (len=2)
+   - "=:rr" (len=2)
+
+2. Лексикографически для одинаковой длины:
+   - "2:yy" < "=:hh" < "=:rr" (2 < = по ASCII)
+
+Результат: "2:eeeee/2:yy/=:hh/=:rr"
+
+Примечания:
+- Игнорируем заглавные буквы и не-буквенные символы
+- Префикс = означает равную частоту в обеих строках
+- Префикс 1 означает большую частоту в s1
+- Префикс 2 означает большую частоту в s2
+- Сортировка по codepoint: цифры (48-57) < буквы (97-122), '=' (61)
+*/
+// console.log(mix('Are they here', 'yes, they are here')); // "2:eeeee/2:yy/=:hh/=:rr"
+// console.log(mix('A generation must confront the looming ', 'codewarrs')); // "1:nnnnn/1:ooooo/1:tttt/1:eee/1:gg/1:ii/1:mm/=:rr"
+// console.log(mix('codewars', 'codewars')); // ''
+// ? -------------------------------------------------------
