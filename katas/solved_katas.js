@@ -7879,3 +7879,23 @@ s2: e=5, h=2, r=2, y=2, a=1, s=1, t=1
 // console.log(mix('A generation must confront the looming ', 'codewarrs')); // "1:nnnnn/1:ooooo/1:tttt/1:eee/1:gg/1:ii/1:mm/=:rr"
 // console.log(mix('codewars', 'codewars')); // ''
 // ? -------------------------------------------------------
+function sortByBit(arr) {
+  const countBits = (num) => {
+    return num.toString(2).replace(/0/g, '').length;
+  };
+
+  return arr.sort((a, b) => {
+    const bitsA = countBits(a);
+    const bitsB = countBits(b);
+
+    if (bitsA !== bitsB) {
+      return bitsA - bitsB;
+    }
+
+    return a - b;
+  });
+}
+
+// console.log(sortByBit([3, 8, 3, 6, 5, 7, 9, 1])); // [1, 8, 3, 3, 5, 6, 9, 7]
+// console.log(sortByBit([9, 4, 5, 3, 5, 7, 2, 56, 8, 2, 6, 8, 0])); // [0, 2, 2, 4, 8, 8, 3, 5, 5, 6, 9, 7, 56]
+// ? -------------------------------------------------------
